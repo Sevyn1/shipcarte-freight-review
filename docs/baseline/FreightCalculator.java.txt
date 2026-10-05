@@ -1,0 +1,45 @@
+package com.shipcarte.techrubiks.calc;
+
+import com.shipcarte.techrubiks.commons.LengthUtils;
+import com.shipcarte.techrubiks.commons.WeightUtils;
+import com.shipcarte.techrubiks.constants.AppnConstants;
+
+public class FreightCalculator {
+	
+	public static double findDensity ( double length, double breadth, double height, double totalWeight, String lengthUnit, String weightUnit ){
+		
+		double volInCubicInches = 0L;
+		double volInCubicFeets = 0L;
+		double density = 0.0;
+		
+		if(length > 0 && breadth > 0 && height > 0 && totalWeight > 0) {
+			
+			if(lengthUnit.equalsIgnoreCase(AppnConstants.Unit.FEET)) {
+				length = LengthUtils.convertFeetToInches(length);
+				height = LengthUtils.convertFeetToInches(height);
+				breadth = LengthUtils.convertFeetToInches(breadth);
+				
+			} else if(lengthUnit.equalsIgnoreCase( AppnConstants.Unit.CENTIMETER )) {
+				length = LengthUtils.convertCmToInches(length);
+				height = LengthUtils.convertCmToInches(height);
+				breadth = LengthUtils.convertCmToInches(breadth);
+			} 
+			
+			if(weightUnit.equalsIgnoreCase( AppnConstants.Unit.KILOGRAM )) {
+				totalWeight = WeightUtils.convertKgToLbs(totalWeight);
+			}
+			
+			volInCubicInches = ( length * breadth * height );
+			volInCubicFeets = volInCubicInches / 1728;
+			
+			if( volInCubicFeets > 0 ) {
+				density = totalWeight / volInCubicFeets;
+				
+			} else {
+				density = 0;
+			}
+		}
+		
+		return density;
+	}
+}

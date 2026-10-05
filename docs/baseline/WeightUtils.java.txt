@@ -1,0 +1,88 @@
+package com.shipcarte.techrubiks.commons;
+
+public class WeightUtils {
+	
+	/**
+	 * Method is used to convert kilograms to Lbs
+	 * 
+	 * @author Sarala Devi
+	 * @since 24/04/2020
+	 * @param kilograms
+	 * @return converted lbs value from kilograms
+	 */
+	public static double convertKgToLbs( double kilograms ){
+		
+		double lbs = 0.0;
+		double value = 0.0;
+		
+		if( kilograms > 0 ) {
+			value = kilograms / 0.453592;
+			
+			if(value > 0) {
+				lbs = Math.round(value * 100.0) / 100.0;
+				return lbs;
+			}
+			
+		} else {
+			lbs = 0.0;
+		}
+		
+		return lbs;
+	}
+	
+	/**
+	 * Method is used to convert kilograms to Ounce
+	 * 
+	 * @author Sarala Devi
+	 * @since 24/04/2020
+	 * @param kilograms
+	 * @return converted Ounce value from kilograms
+	 */
+	public static double convertKgToOunce( double kilograms ){
+		
+		double ounce = 0.0;
+		double value = 0.0;
+		
+		if( kilograms > 0 ) {
+			value = kilograms * 35.274;
+			
+			if(value > 0) {
+				ounce = Math.round(value * 100.0) / 100.0;
+				return ounce;
+			}
+			
+		} else {
+			ounce = 0.0;
+		}
+		
+		return ounce;
+	}
+	
+	/**
+	 * Method is used to convert Lbs to Ounce
+	 *
+	 * @author Sarala devi
+	 * @since 24/04/2020
+	 * @param Lbs
+	 * @return converted Ounce value from Lbs
+	 */	
+	public static double convertLbsToOunce( double Lbs ){
+		
+		double ounce = 0.0;
+		double value = 0.0;
+		
+		if( Lbs > 0 ) {
+			value = Lbs * 16;
+			
+			if(value > 0) {
+				ounce = Math.round(value * 100.0) / 100.0;
+				return ounce;
+			}
+			
+		} else {
+			ounce = 0.0;
+		}
+		return ounce;
+	}
+
+}
