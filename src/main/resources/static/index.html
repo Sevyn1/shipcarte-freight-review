@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ShipCarte · Freight Density</title><link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<main>
+  <header><span class="eyebrow">SHIPCARTE / FREIGHT TOOLS</span><h1>Know your shipment’s density.</h1><p>Enter the dimensions and weight of one packed shipment. Get its density in pounds per cubic foot.</p></header>
+  <div class="workspace">
+    <section class="card"><div class="section-heading"><span class="step">01</span><h2>Shipment measurements</h2></div>
+      <form id="calculator">
+        <fieldset><legend>Dimensions</legend><div class="dimensions">
+          <label>Length<input name="length" type="number" step="any" min="0.000000001" value="12" required></label>
+          <label>Width<input name="breadth" type="number" step="any" min="0.000000001" value="12" required></label>
+          <label>Height<input name="height" type="number" step="any" min="0.000000001" value="12" required></label>
+        </div><label class="unit">Dimension unit<select name="lengthUnit"><option value="inch">Inches</option><option value="feet">Feet</option><option value="cm">Centimetres</option></select></label></fieldset>
+        <fieldset><legend>Weight</legend><div class="weight"><label>Total weight<input name="weight" type="number" step="any" min="0.000000001" value="10" required></label><label>Weight unit<select name="weightUnit"><option value="lbs">Pounds</option><option value="kg">Kilograms</option></select></label></div></fieldset>
+        <button id="calculate" type="submit">Calculate density <span aria-hidden="true">→</span></button>
+      </form>
+      <div class="examples"><span>Try a sample</span><button type="button" data-example="imperial">12-inch cube</button><button type="button" data-example="metric">Metric equivalent</button><button type="button" data-example="larger">Larger box</button></div>
+    </section>
+    <section class="card result" aria-labelledby="result-title"><div class="section-heading"><span class="step">02</span><h2 id="result-title">Freight density</h2></div>
+      <div class="box-art" aria-hidden="true"><svg viewBox="0 0 240 180"><path d="M40 62 120 22 200 62 120 105Z" fill="#d1b588"/><path d="M40 62v82l80 35v-74Z" fill="#b68d58"/><path d="m120 105 80-43v82l-80 35Z" fill="#e2ca9f"/><path d="m80 42 80 41v23l-23 12V94L58 53Z" fill="#f0debd"/></svg></div>
+      <div id="result" aria-live="polite"><p class="placeholder">Your result will appear here.</p><p class="hint">Choose a sample or calculate your own shipment.</p></div>
+      <p id="error" role="alert" hidden></p>
+      <div class="formula"><span>HOW IT WORKS</span><p>Weight in pounds ÷ volume in cubic feet</p><small>All dimensions are converted before calculation. Precision is retained until the result is displayed.</small></div>
+    </section>
+  </div>
+  <footer><p>Density calculator · no carrier rates or freight-class assignment</p><p>From the shared ShipCarte course project, with reviewed calculations and input validation. <a href="https://github.com/Sevyn1/shipcarte-freight-review">View source &amp; credits ↗</a></p></footer>
+</main>
+</body></html>

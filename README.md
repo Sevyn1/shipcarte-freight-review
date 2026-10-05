@@ -10,9 +10,25 @@ A focused maintenance review of the freight-density module from a shared Java co
 
 The original conversion helpers rounded each intermediate value to two decimal places. Very small measurements could become zero, and fractional values lost precision before density was calculated. The calculator also treated unrecognized units as if they were inches or pounds, returned zero for invalid dimensions, and did not explicitly reject non-finite input.
 
-The reviewed implementation retains conversion precision, validates supported units, rejects non-positive/non-finite measurements and unsupported numeric ranges, and provides a local command-line example. The original helper names and course source credits are preserved; exact baseline files are included in [docs/baseline](docs/baseline).
+The reviewed implementation retains conversion precision, validates supported units, rejects non-positive/non-finite measurements and unsupported numeric ranges, and provides a browser calculator and local command-line example. The original helper names and course source credits are preserved; exact baseline files are included in [docs/baseline](docs/baseline).
 
-## Run
+## Browser calculator
+
+```sh
+./mvnw package
+java -jar target/freight-review-1.0.0.jar
+```
+
+Open http://127.0.0.1:8085/. Enter dimensions and weight, choose units, and calculate.
+Three sample buttons demonstrate equivalent metric/imperial shipments and a larger
+box. The browser sends measurements to the reviewed Java calculator through
+`GET /api/density`; it does not reproduce the calculation in JavaScript. Edits clear
+the previous result to avoid presenting stale output. Requests have a ten-second
+deadline and errors are shown explicitly. The server binds only to loopback.
+
+![Working browser calculator](docs/browser-preview.png)
+
+## Command-line calculator
 
 Requires Java 17. The Maven wrapper downloads Maven and dependencies on its first run.
 
@@ -31,7 +47,7 @@ Use `mvnw.cmd` on Windows. Supported units are `inch`, `feet`, `cm`, `lbs` and `
 
 ## Verification
 
-**13 test cases pass**: equivalent imperial/metric shipments, fractional and very small values, ounce conversions, normalized units, invalid dimensions and mass, unknown/null units, overflow and underflow. The Maven build packages the module successfully. No carrier account, database, cloud credential or network service is required by the calculator.
+**17 test cases pass**: equivalent imperial/metric shipments, fractional and very small values, ounce conversions, normalized units, invalid dimensions and mass, unknown/null units, overflow and underflow. Four additional API tests cover metric calculation, invalid/missing inputs and static assets. The Maven build packages the browser app successfully. No carrier account, database, cloud credential or external service is required. This calculates density, not shipping rates or freight classes.
 
 See [review decisions](docs/REVIEW.md) and [interview preparation](docs/INTERVIEW_REVIEW.md).
 
